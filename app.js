@@ -13,7 +13,7 @@ const app = express();
 // Set up mongoose connection
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
-const dev_db_url = "mongodb+srv://janmeyjaimishra2022:xbcTSnaMzMsHnwQL@cluster0.qa981qy.mongodb.net/gdsc_task?retryWrites=true&w=majority";
+const dev_db_url = "";
 
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 

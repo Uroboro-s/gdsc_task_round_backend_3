@@ -6,7 +6,7 @@ const asyncHandler = require('express-async-handler');
 //GET all todos
 exports.todos = asyncHandler(async (req, res, next) => {
 
-    console.log(Todo);
+    //console.log(Todo);
     const allTodos = await Todo.find({}).exec();
 
     if(!allTodos)
@@ -45,13 +45,21 @@ exports.createOne = asyncHandler( async (req, res, next) => {
     res.status(201).json({
         data: todo,
     });
-    
+
 });
 
 
 //UPDATE one todo specified by id
 exports.updateOne = asyncHandler( async (req, res, next) => {
-    res.send("yoho");
+    const todo = await Todo.findById(req.params.id);
+
+    if(!todo)
+        return next(new Error("404 not found?"));
+    console.log("here");
+    res.status(200).json({
+        data: todo,
+    });
+
 });
 
 
