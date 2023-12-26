@@ -1,5 +1,6 @@
 
 const Todo = require('../models/todo')
+const AppError = require('../utils/appError');
 
 const asyncHandler = require('express-async-handler');
 
@@ -23,7 +24,7 @@ exports.getOne = asyncHandler( async (req, res, next) => {
     const todo = await Todo.findById(req.params.id);
 
     if(!todo)
-        return next(new Error("404 not found?"));
+        return next(new Error("404: No document found with that id"));
 
     res.status(200).json({
         data: todo,
@@ -57,7 +58,7 @@ exports.updateOne = asyncHandler( async (req, res, next) => {
     });
 
     if(!todo)
-        return next(new Error("404 not found?"));
+        return next(new Error("404: No document found with that id"));
     //console.log("here");
     res.status(200).json({
         data: todo,
@@ -71,7 +72,7 @@ exports.deleteOne = asyncHandler( async (req, res, next) => {
     const todo = await Todo.findByIdAndDelete(req.params.id);
 
     if(!todo)
-        return next(new Error("404 not found?"));
+        return next(new Error("404: No document found with that id"));
 
     res.status(200);
     res.json();
